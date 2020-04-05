@@ -25,6 +25,14 @@ if __name__ == "__main__":
   number_of_dead = soup.find('p', {'id' : 'count-dead'}).text
   lower_text_dead = soup.findAll('p', {'class' : 'h3 mt-10 text--center'})[1].text
 
+  json = {"phonetype": "N95", "cat": "WP"};
+
+  with open('korona'+str(date.today())+'.txt', "w", encoding="utf-8") as text_file:
+      print(upper_text_tests+' '+number_of_tests+' '+lower_text_tests, file=text_file)
+      print(upper_text_sick+' '+number_of_sick+' '+lower_text_sick, file=text_file)
+      print(upper_text_recovered+' '+number_of_recovered+' '+lower_text_recovered, file=text_file)
+      print(upper_text_dead+' '+number_of_dead+' '+lower_text_dead, file=text_file)
+
   with open('korona'+str(date.today())+'.csv', mode='w', encoding="utf-8") as corona_file:
       corona_writer = csv.writer(corona_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
       corona_writer.writerow([upper_text_tests,number_of_tests,lower_text_tests])
